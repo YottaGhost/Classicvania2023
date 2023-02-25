@@ -73,7 +73,9 @@ public class Subitens : MonoBehaviour
         
     }
     void Cross(){
-
+        Instantiate(CrossPrefab, firePoint.position, firePoint.rotation);
+            CooldownStart = true;
+            Cooldown = 3.5;
     }
     void SacredShield(){
             Rodar chi = shield.GetComponent<Rodar>();

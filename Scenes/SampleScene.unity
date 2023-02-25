@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChakranPrefab: {fileID: 2608473473199992827, guid: 10a081ba6c964db419a9223e4d0a81a3, type: 3}
   WaterPrefab: {fileID: 0}
-  CrossPrefab: {fileID: 0}
+  CrossPrefab: {fileID: 4026719768281538613, guid: 75530d55992d1f9419f4d2c52ebfcece, type: 3}
   FirePrefab: {fileID: 2608473473199992827, guid: 2df9b8c5749c4f04ea2b46c094899a84, type: 3}
   firePoint: {fileID: 1182860011}
   selec: 1
