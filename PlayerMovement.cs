@@ -15,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
 
+    public float fallSpeed = 10f;
+    public float maxFallSpeed = 20f;
+    public float maxTimeInAir = 3f;
+    private float timeInAir;
 
     void Update()
     {
@@ -38,6 +42,32 @@ public class PlayerMovement : MonoBehaviour
 
             Flip();
         }else{rb.velocity =new Vector2(0,0);}
+
+
+        if (!IsGrounded())
+        {
+            // Incrementa o tempo no ar
+            timeInAir += Time.deltaTime;
+
+            // Verifica se o tempo no ar é maior que o máximo permitido
+            if (timeInAir >= maxTimeInAir)
+            {
+                Debug.Log("AAa");
+                // Aumenta a velocidade de queda
+                fallSpeed = maxFallSpeed;
+            }
+
+            // Move o personagem para baixo com a velocidade de queda
+            transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
+        }
+        else
+        {
+            // Se o personagem estiver no chão, zera o tempo no ar e a velocidade de queda
+            timeInAir = 0f;
+            fallSpeed = 0f;
+        }
+    
+
     }
 
     private void FixedUpdate()

@@ -2,31 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChicoteTiro : MonoBehaviour
+public class IniBala : MonoBehaviour
 {
-    GameObject player;
+
+    public float speed = 6f;
+    public Rigidbody2D rb;
     public double dano;
     public double vida;
+
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        rb.velocity = transform.right * speed;
     }
+
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        inimigo enemy = hitInfo.GetComponent<inimigo>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(dano);
-        }
+        AtaquePlayer jogador = hitInfo.gameObject.GetComponent<AtaquePlayer>();
+            if (jogador != null)
+            {
+                jogador.TakeDamage(dano);
+                Destroy(gameObject);
+            }
     }
     // Update is called once per frame
     void Update()
     {
-        dano = 50;
-
         vida += 1 * Time.deltaTime;
-        if (vida >= 0.2)
+        if (vida >= 4)
         {
             Destroy(gameObject);
         }

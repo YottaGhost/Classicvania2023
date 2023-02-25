@@ -13,9 +13,10 @@ public class Subitens : MonoBehaviour
     GameObject shield;
     public int selec = 1;
     public int maxSec =1;
-
+    public int Water;
     public double Cooldown = 0;
-    public bool CooldownStart = false;
+    public double MxCol = 1;
+    public bool CooldownStart = true;
     void Start()
     {
         shield = GameObject.FindWithTag("Shield");
@@ -26,7 +27,8 @@ public class Subitens : MonoBehaviour
     void Update()
     {
         //Verifica qual subweapon ta ativa e chama a funçao da mesma, pra spawnar ela
-        if (Input.GetButtonDown("Fire2") && Cooldown <= 0) {
+        if (Input.GetButtonDown("Fire2") && Cooldown >= MxCol) {
+            Cooldown = 0;
             if (selec == 1){
                 Chakran();
             }
@@ -58,39 +60,53 @@ public class Subitens : MonoBehaviour
             }
         }
 
-        
+        if (selec ==1){
+            MxCol = 3.5;
+        }
+        if (selec == 2){
+            MxCol =3;
+        }
+        if (selec == 3 || selec == 5){
+            MxCol = 4;
+        }
+        if (selec == 4){
+            MxCol = 6;
+        }
 
         //cooldown pra n ser spamevel, provavelmente sera o mesmo em todas as armas
         if (CooldownStart == true){
-            Cooldown -= 1 * Time.deltaTime;
+            Cooldown += 1 * Time.deltaTime;
         }
     }
     void Chakran(){
         //chakran, vai pra frente e dps volta   
             Instantiate(ChakranPrefab, firePoint.position, firePoint.rotation);
             CooldownStart = true;
-            Cooldown = 4;
+            MxCol = 3.5;
         
     }
     void Cross(){
         Instantiate(CrossPrefab, firePoint.position, firePoint.rotation);
             CooldownStart = true;
-            Cooldown = 3.5;
+            MxCol = 3;
     }
     void SacredShield(){
             Rodar chi = shield.GetComponent<Rodar>();
             chi.cdStart = true;
             shield.SetActive(true);
             CooldownStart = true;
-            Cooldown = 4;
+            MxCol = 4;
     }
     void SacredWater(){
-
+            Water = 4;
+            Instantiate(WaterPrefab, firePoint.position, firePoint.rotation);
+            CooldownStart = true;
+            MxCol = 6;
     }
     void SacredFire(){
         Instantiate(FirePrefab, firePoint.position, firePoint.rotation);
             CooldownStart = true;
-            Cooldown = 3.5;
+            MxCol = 4;
     }
     
 }

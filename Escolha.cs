@@ -9,6 +9,7 @@ public class Escolha : MonoBehaviour
     GameObject cross;
     GameObject shield;
     GameObject water;
+    GameObject fire;
     GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class Escolha : MonoBehaviour
         cross = GameObject.FindWithTag("UiCross");
         shield = GameObject.FindWithTag("UiShield");
         water = GameObject.FindWithTag("UiWater");
-        chak = GameObject.FindWithTag("Uifire");
+        fire = GameObject.FindWithTag("UiFire");
         player = GameObject.FindWithTag("Player");
     }
 
@@ -36,10 +37,10 @@ public class Escolha : MonoBehaviour
                 vc.transform.position = shield.transform.position;
             }
             if (chi.selec == 4){
-                
+                vc.transform.position = water.transform.position;
             }
             if (chi.selec == 5){
-                
+                vc.transform.position = fire.transform.position;
             }
         
 

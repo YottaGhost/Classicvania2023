@@ -14,6 +14,7 @@ public class AtaquePlayer : MonoBehaviour
     public bool atacando = false;
 
     public Animator animator;
+    GameObject Black;
 
     public GameObject balaprefab;
     public Transform firePoint;
@@ -30,7 +31,7 @@ public class AtaquePlayer : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && Cooldown <= 0) {
             Instantiate(balaprefab, firePoint.position, firePoint.rotation);
             CooldownStart = true;
-            Cooldown = 1;
+            Cooldown = 0.3;
             atacando = true;
         }
 
@@ -60,14 +61,17 @@ public class AtaquePlayer : MonoBehaviour
         }
     }
     
-    public void TakeDamage(float damage)
+    public void TakeDamage(double damage)
     {
         if (block == false){
             CurrentHp -= damage;
             if (CurrentHp <= 0)
             {
             //canvas.SetActive(true);
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
+                Black = GameObject.FindWithTag("BlackScreen");
+                ImageController treco = Black.GetComponent<ImageController>();
+                treco.isCoveringScreen = true;
             }
         } else{
             stamina -=1;
